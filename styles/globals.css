@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+.w-fixed, .w-fixed-left {
+  flex: 0 1 300px;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .w-fixed-left {
+    flex: 0 1 0px;
+    min-width: 0px;
+  }
+  .w-fixed {
+    flex: 0 1 200px;
+    min-width: 200px;
+  }
+}
+.main-container {
+  margin-top:-30px;
+}
+.main-heading {
+  line-height: 1.2;
+}
+
+.header, .team-stats {
+  z-index:500;
+}
+
+.right-nav {
+  margin-top:10px;
+  margin-right:15px;
+}
+.network-status {
+  color:white;
+  position:absolute;
+  bottom:10px;
+  right:15px;
+  text-align:right;
+}
+
+.portrait {
+  width:255px;
+  height:255px;
+  color:white;
+  float:left; 
+  margin-left:30px;
+  margin-bottom:40px;
+  z-index:100;
+  position:relative;
+  
+}
+
+.portrait img {
+  border-radius:10px;
+  border:5px solid rgba(255,255,255,0.15);
+}
+.portrait:hover img {
+  filter: contrast(100%);
+}
+.portrait-container{
+  z-index:100;
+  height:450px;
+  overflow-y:scroll;
+  padding-bottom:100px;
+}
+.portraits {
+  z-index:100;
+  position:absolute;
+  top: 75px;
+  left:0;
+}
+
+.portrait-label, .portrait-id {
+  font-weight:bold;
+  font-size:20px;
+  text-align:center;
+  -webkit-text-stroke-color: rgba(0,0,0,0.8);
+  -webkit-text-stroke-width: 1px; 
+  filter: contrast(100%);
+  position:relative;
+}
+
+.portrait-id {
+  position:absolute;
+  bottom:-33px;
+  right:10px;
+  font-size:50px;
+  text-align:right;
+  z-index:200;
+}
+
+.Blue {
+  color:rgb(0, 123, 255);
+}
+.Green {
+  color:rgb(0, 255, 0);
+}
+.Gold {
+  color:rgba(206, 177, 14, 0.994);
+}
+.Red {
+  color:rgb(255, 30, 0);
+}
+.Purple {
+  color:rgb(197, 5, 197);
+}
+.Black {
+  color: black;
+}
+.White {
+  color: #eee;
+}
+
+
+.low-glow {
+  filter: drop-shadow(0 0 0.5rem rgb(222, 222, 222,0.8));
+}
+.Blue-glow:hover, .Blue-glow.selected {
+  filter: drop-shadow(0 0 0.75rem rgb(0, 123, 255));
+}
+.Green-glow:hover, .Green-glow.selected {
+  filter: drop-shadow(0 0 0.75rem rgb(0, 255, 0));
+}
+.Gold-glow:hover, .Gold-glow.selected {
+  filter: drop-shadow(0 0 0.75rem rgba(206, 177, 14, 0.994));
+}
+.Red-glow:hover, .Red-glow.selected {
+  filter: drop-shadow(0 0 0.75rem rgb(255, 30, 0));
+}
+.Purple-glow:hover, .Purple-glow.selected {
+  filter: drop-shadow(0 0 0.75rem rgb(197, 5, 197));
+}
+.Black-glow:hover, .Black-glow.selected {
+  filter: drop-shadow(0 0 0.75rem #888);
+}
+.White-glow:hover, .White-glow.selected {
+  filter: drop-shadow(0 0 0.75rem #eee);
+}
+
+
+.portraits-title {
+  font-size:60px;
+  color:white;
+  margin-left:30px;
+  font-weight:bold;
+}
+
+.glow, .portrait:hover .glow {
+  text-align: center;
+  -webkit-animation: glow 11s ease-in-out infinite alternate;
+  -moz-animation: glow 11s ease-in-out infinite alternate;
+  animation: glow 11s ease-in-out infinite alternate;
+}
+
+.portrait:hover .glow  {
+  -webkit-animation: glow 0.4s ease-in-out infinite alternate;
+  -moz-animation: glow 0.4s ease-in-out infinite alternate;
+  animation: glow 0.4s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 3px 0 10px #aaa, 3px 0 12px #ddd;
+  }
+  to {
+    text-shadow: 0 0 10px #333, 0 0 20px #333, 0 0 30px #333;
+  }
+}
+
+::-webkit-scrollbar{
+	width: 10px;
+}
+
+::-webkit-scrollbar-track-piece{
+	background-color: rgba(255, 255, 255, 0);
+}
+
+::-webkit-scrollbar-thumb{
+	background-color: #fff;
+	outline: 2px solid #FFF;
+	outline-offset: -2px;
+	border: .1px solid #B7B7B7;
+}
+
+::-webkit-scrollbar-thumb:hover{
+	background-color: #909090;
+}
+
+
+
+.team {
+  position:fixed;
+  top:48px;
+  left:0px;
+  text-align: left;
+}
+.team .portraits-title {
+  font-size:96px ;
+}
+
+.team-portraits {
+  position: fixed;
+    top: 180px;
+    left: 0px;
+}
+
+.clear {
+  clear:both;
+}
+
+.unselected {
+  filter: brightness(30%);
+}
+.portrait.selected img {
+  filter: contrast(100%);
+}
+
+.back-button {
+  position:fixed;
+  top:5px;
+  left:20px;
+  text-align: left;
+}
+
+.register-team-button.active:hover {
+  color:rgb(255, 248, 210);
+  background-color: rgba(206, 177, 14, 0.4);
+}
+
+.register-team-button {
+  color:#aaa;
+  background-color: rgba(0, 0, 0, 0.4);
+  position:relative;
+  left:20px;
+  bottom:16px;
+}
+
+.register-team-button.active {
+  color:gold;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.team-stats-synergies, .team-stats-matchup {
+  color:rgb(255, 255, 255);
+}
