@@ -44,6 +44,27 @@ a {
   z-index:500;
 }
 
+.socials {
+  color:white;
+  float:right;
+  text-align:right;
+  margin-right:20px;
+  margin-top:-2px;
+}
+.socials a {
+  float:left;
+  padding-left:10px;
+}
+.wallet {
+  float:right;
+}
+.whitelist {
+  font-size:1.2em;
+  font-weight:bold;
+  color:white;
+  padding-top:5px;
+}
+
 .right-nav {
   margin-top:10px;
   margin-right:15px;

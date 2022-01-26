@@ -6,7 +6,7 @@ import useEagerConnect from "../hooks/useEagerConnect";
 import Background from "../components/Background";
 import AppContent from "../components/AppContent";
 import { useEffect, useState } from "react";
-import usePrismDAOTokens from "../hooks/usePrismDAOTokens";
+import { FaDiscord, FaTwitter, FaMedium} from 'react-icons/fa';
 
 function Home() {
   const { account, library } = useWeb3React();
@@ -41,13 +41,20 @@ function Home() {
           <div className="flex flex-row-reverse">
             <nav>
               <div className="right-nav inset-y-2 right-2 text-right">
-                <Account triedToEagerConnect={triedToEagerConnect} />
+                <div className="wallet"><Account triedToEagerConnect={triedToEagerConnect} /></div>
+                <div className="socials  absolute sm:relative sm:top-0">
+                  <a className="text-white hover:opacity-70 whitelist glow Gold-glow selected hidden sm:block" href="https://discord.gg/CX5nyXNutT" target="_BLANK" rel="noopener noreferrer">WHITELIST ON DISCORD ☛ </a>
+                  <a className="text-white hover:opacity-70 glow Gold-glow selected" href="https://discord.gg/CX5nyXNutT" target="_BLANK" rel="noopener noreferrer"><FaDiscord size="2.5em" /> </a>
+                  <a className="text-white hover:opacity-70" href="https://twitter.com/TheGreedGames" target="_BLANK" rel="noopener noreferrer"><FaTwitter  size="2.5em"  /> </a>
+                  <a className="text-white hover:opacity-70" href="https://medium.com/@greed.games" target="_BLANK" rel="noopener noreferrer"><FaMedium   size="2.5em" /> </a>
+                </div>
                 
-                <h1 className="text-6xl md:text-8xl font-bold text-white text-right select-none z-1">
+                
+                <h1 className="text-6xl md:text-8xl font-bold text-white text-right select-none z-1 clear">
                   <div className="">GREED GAMES</div>
                   <div className="mt-1 text-[1.25rem] md:text-[2.35rem]">A <b>PrismDAO</b> Spectacle</div>
                 </h1>
-                <ul className="absolute mr-0 sm:mr-5 text-left sm:text-right sm:relative sm:top-0 top-0 left-4 mt-8 flex-row space-y-0 sm:flex-col sm:space-y-2 font-medium text-lg ">
+                <ul className="absolute mr-0 sm:mr-5 text-left sm:text-right sm:relative top-8 left-4 mt-8 flex-row space-y-0 sm:flex-col sm:space-y-2 font-medium text-lg ">
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href="https://testnets.opensea.io/collection/the-greed-games" target="_BLANK" rel="noopener noreferrer">Trade Gladiators</a>
                   </li>
@@ -59,10 +66,7 @@ function Home() {
                   </li>
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href={prismDAOMembershipEtherscan} target="_BLANK" rel="noopener noreferrer">Contract</a>
-                  </li>
-                  <li className="mr-0">
-                    <a className="text-white hover:opacity-70" href="https://discord.gg/CX5nyXNutT" target="_BLANK" rel="noopener noreferrer">Discord</a>
-                  </li>   
+                  </li> 
                 </ul>
               </div>
             </nav>
