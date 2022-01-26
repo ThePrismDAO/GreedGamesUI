@@ -55,7 +55,7 @@ function Home() {
                     <a className="text-white hover:opacity-70" href="/PrismDAO White Paper.pdf" target="_BLANK" rel="noopener noreferrer">White Paper</a>
                   </li>
                   <li className="mr-0">
-                    <a className="text-white hover:opacity-70" href="https://github.com/ThePrismDAO/GreedGameUI" target="_BLANK" rel="noopener noreferrer">Repository</a>
+                    <a className="text-white hover:opacity-70" href="https://github.com/ThePrismDAO/GreedGamesUI" target="_BLANK" rel="noopener noreferrer">Repository</a>
                   </li>
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href={prismDAOMembershipEtherscan} target="_BLANK" rel="noopener noreferrer">Contract</a>

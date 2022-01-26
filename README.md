@@ -1,6 +1,6 @@
 # PrismDAO Minting UI
 
-[See the deployed app here.](https://prism-dao-ui.vercel.app/)
+[See the deployed app here.](https://greed-games-ui.vercel.app/)
 
 ## Features
 
@@ -23,35 +23,6 @@ The contract is [deployed to the Kovan testnet](https://kovan.etherscan.io/token
 ## Rinkeby Testnet
 
 The contract is [deployed to the Rinkeby testnet](https://rinkeby.etherscan.io/token/0xb0178CAe4d95E9A85aAd5cb40d6C4bcC4a0E741c) (chain id 4). [Opensea is on the Rinkeby testnet](https://docs.opensea.io/reference/rinkeby-api-overview) so that is a logical next step to test the API. [Rinkeby faucet here](https://faucets.chain.link/rinkeby).
-
-# Template Instructions
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmirshko%2Fnext-web3-boilerplate)
-
-This is a default [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), customized as the default boilerplate for new Web3 projects.
-
-## Features
-
-- Separate packages from [ethers.js](https://docs.ethers.io/v5/) for improved tree-shaking, often only ethers Contracts
-- Hooks-first approach to fetching and caching data from Contracts and memoization for performance with [SWR](https://swr.vercel.app)
-- [web3-react](https://github.com/NoahZinsmeister/web3-react) for ease of connecting to Web3 providers with a solid API
-- Auto-generates types for the contract ABIs in the `/contracts` folder via [TypeChain](https://github.com/ethereum-ts/TypeChain)
-
-### Auto Contract Type Generation
-
-**Note**: After adding in your new contract ABIs (in JSON format) to the `/contracts` folder, run `yarn compile-contract-types` to generate the types.
-
-You can import these types when declaring a new Contract hook. The types generated show the function params and return types of your functions, among other helpful types. 
-
-```ts
-import MY_CONTRACT_ABI from "../contracts/MY_CONTRACT.json";
-import type { MY_CONTRACT } from "../contracts/types";
-import useContract from "./useContract";
-
-export default function useMyContract() {
-  return useContract<MY_CONTRACT>(CONTRACT_ADDRESS, MY_CONTRACT_ABI);
-}
-```
 
 ## Getting Started
 
@@ -79,9 +50,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

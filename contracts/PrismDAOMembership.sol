@@ -4,9 +4,9 @@
 
 pragma solidity ^0.8.0;
 
-import "https://github.com/chiru-labs/ERC721A/blob/main/contracts/ERC721A.sol;
+import "https://github.com/chiru-labs/ERC721A/blob/main/contracts/ERC721A.sol";
 
-contract PrismDAOMembership is ERC721A {
+contract GreedGamesGladiators is ERC721A {
     // max minting batch size for ERC721A batch minting
     uint256 internal maxMintBatchSize = 100;
 
