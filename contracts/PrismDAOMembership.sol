@@ -6,7 +6,7 @@ pragma solidity ^0.8.0;
 
 import "https://github.com/chiru-labs/ERC721A/blob/main/contracts/ERC721A.sol";
 
-contract GreedGamesGladiators is ERC721A {
+contract PrismDAOMembership is ERC721A {
     // max minting batch size for ERC721A batch minting
     uint256 internal maxMintBatchSize = 100;
 
@@ -60,7 +60,7 @@ contract GreedGamesGladiators is ERC721A {
      */
 
     // the API address at uri/<token_id>
-    string private baseUri = "https://greed.games/member/";
+    string private baseUri = "https://member.greed.games//";
 
     // event for changing baseUri
     event BaseUriSet(string indexed oldBaseUri, string indexed newBaseUri);
