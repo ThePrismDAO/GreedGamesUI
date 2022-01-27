@@ -105,7 +105,7 @@ a {
 .portraits {
   z-index:100;
   position:absolute;
-  top: 75px;
+  top: 100px;
   left:0;
 }
 

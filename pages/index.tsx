@@ -23,7 +23,7 @@ function Home() {
   const [numTokensOwned, setNumTokensOwned] = useState(1);
   const [gameStatus, setGameStatus] = useState("Unconnected");
   
-  const tokenAPIUri = "https://greed.games/member/";
+  const tokenAPIUri = "https://member.greed.games/";
 
   useEffect(() => {
     setBarWidth( (numTokensMinted / numTokensAvailable * 100) + "%")
