@@ -9,7 +9,7 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
     const [teamString, setTeamString] = useState("");
 
     // create vars for all of the team slots and give default blank data
-    const defaultSlotData = {"image":"https://greed.games/portraits/trash/220117-162435_735672_lg500_tuning_images--.png","id":"","guild":"Select"};
+    const defaultSlotData = {"image":"https://member.greed.games/portraits/trash/220117-162435_735672_lg500_tuning_images--.png","id":"","guild":"Select"};
     const [teamSlot1, setTeamSlot1] = useState(defaultSlotData);
     const [teamSlot1Status, setTeamSlot1status] = useState("unselected");
     const [teamSlot2, setTeamSlot2] = useState(defaultSlotData);
