@@ -96,7 +96,7 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
                 <img className="low-glow" src={tokenAPIUri+t.tokenIndex+"/image"}  onClick={() => onPortraitClick(t)} />
             </div>)
             }
-        })
+        }).reverse()
     }
 
     // get the mint tx call to pass as an onclick event

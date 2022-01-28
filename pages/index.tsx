@@ -48,13 +48,13 @@ function Home() {
                   <a className="text-white hover:opacity-70" href="https://twitter.com/TheGreedGames" target="_BLANK" rel="noopener noreferrer"><FaTwitter  size="2.5em"  /> </a>
                   <a className="text-white hover:opacity-70" href="https://medium.com/@greed.games" target="_BLANK" rel="noopener noreferrer"><FaMedium   size="2.5em" /> </a>
                 </div>
-                
-                
+
                 <h1 className="text-6xl md:text-8xl font-bold text-white text-right select-none z-1 clear">
                   <div className="">GREED GAMES</div>
                   <div className="mt-1 text-[1.25rem] md:text-[2.35rem]">A <b>PrismDAO</b> Spectacle</div>
                 </h1>
-                <ul className="absolute mr-0 sm:mr-5 text-left sm:text-right sm:relative top-8 left-4 mt-8 flex-row space-y-0 sm:flex-col sm:space-y-2 font-medium text-lg ">
+
+                <ul className="absolute mr-0 sm:mr-5 text-left sm:text-right sm:relative top-8 sm:top-0 left-4 mt-8 sm:mt-8 flex-row space-y-0 sm:flex-col sm:space-y-2 font-medium text-lg ">
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href="https://testnets.opensea.io/collection/the-greed-games" target="_BLANK" rel="noopener noreferrer">Trade Gladiators</a>
                   </li>
@@ -68,6 +68,7 @@ function Home() {
                     <a className="text-white hover:opacity-70" href={prismDAOMembershipEtherscan} target="_BLANK" rel="noopener noreferrer">Contract</a>
                   </li> 
                 </ul>
+
               </div>
             </nav>
           </div>
