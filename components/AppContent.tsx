@@ -49,7 +49,7 @@ const AppContent = ({account, library, chain, numTokensOwned, gameStatus, setGam
                     onChange={(e) => setNumTokensToMint(parseInt(e.currentTarget.value))}
                     >
                     {
-                        Array.from(Array(20).keys()).map((value) => (<option className="text-sm text-black font-medium" key={value+1} value={value+1}>{value+1}</option>))
+                        [0,1,2,3,4,5,6,7,8,9,14,19,29,39,49,99].map((value) => (<option className="text-sm text-black font-medium" key={value+1} value={value+1}>{value+1}</option>))
                     }
                     </select>
                     {" "}
@@ -61,7 +61,7 @@ const AppContent = ({account, library, chain, numTokensOwned, gameStatus, setGam
                 </div>
                 <div className="text-center py-4 lg:px-4 w-full">
                     <div className="py-2 px-4 bg-black/20 items-center text-white leading-none inline-flex rounded-full " role="alert">
-                    <span className="font-medium text-2xs md:text-sm leading-4 text-center mr-2 flex-auto">Mint up to 20 NFTs in a single transaction for <span className="text-yellow-400 font-bold">25x less gas</span> compared to a typical NFT mint!</span>
+                    <span className="font-medium text-2xs md:text-sm leading-4 text-center mr-2 flex-auto">Mint up to 100 NFTs in a single transaction for <span className="text-yellow-400 font-bold">25x less gas</span> compared to a typical NFT mint!</span>
                     </div>
                 </div>
             </div>

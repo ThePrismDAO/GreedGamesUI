@@ -14,7 +14,7 @@ function Home() {
   
   const [barWidth, setBarWidth] = useState("2%");
   const [numTokensMinted, setTotalSupply] = useState(11);
-  const [numTokensAvailable, setMaxSupply] = useState(3000);
+  const [numTokensAvailable, setMaxSupply] = useState(3333);
   const [numTokensToMint, setNumTokensToMint] = useState(10);
   const [mintPriceEth, setMintPrice] = useState(0.001);
   const [prismDAOMembershipEtherscan, setPrismDAOMembershipEtherscan] = useState("");
