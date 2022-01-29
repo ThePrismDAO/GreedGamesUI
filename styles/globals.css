@@ -283,3 +283,7 @@ a {
 .team-stats-synergies, .team-stats-matchup {
   color:rgb(255, 255, 255);
 }
+
+.portrait-id span.Black {
+  filter: drop-shadow(0 0 0.1rem rgb(130, 130, 130));
+}
