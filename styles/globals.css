@@ -98,14 +98,14 @@ a {
 }
 .portrait-container{
   z-index:100;
-  height:450px;
+  height:497px;
   overflow-y:scroll;
   padding-bottom:100px;
 }
 .portraits {
   z-index:100;
   position:absolute;
-  top: 100px;
+  top: 150px;
   left:0;
 }
 
