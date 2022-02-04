@@ -3,6 +3,7 @@ import PrismDAOMembershipStatus from "./PrismDAOMembershipStatus";
 import GreedGameTeamSelect from "./GreedGameTeamSelect";
 import { useEffect, useState } from "react";
 import usePrismDAOTokens from "../hooks/usePrismDAOTokens";
+import ViewBracket from "./ViewBracket";
 
 const AppContent = ({account, library, chain, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned}) => {
     // set up state for the contract address to reusue it for both the token ownership info and the rest of the contract state
@@ -76,6 +77,11 @@ const AppContent = ({account, library, chain, numTokensOwned, gameStatus, setGam
         return (
                  <GreedGameTeamSelect setGameStatus={setGameStatus} library={library} account={account} tokens={tokens} numTokensOwned={numTokensOwned} tokenAPIUri={tokenAPIUri}  />
         );  
+    }
+
+    // show the team select page
+    if(gameStatus == "ViewBracket") {
+        return  <ViewBracket />
     }
     
     return <h2>Error...</h2>

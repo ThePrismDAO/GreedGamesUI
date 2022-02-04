@@ -151,6 +151,31 @@ a {
   color: #eee;
 }
 
+.small-outline {
+  
+}
+.Blue-outline {
+  border: 1px solid rgb(0, 123, 255,0.8);
+}
+.Green-outline {
+  border: 1px solid rgb(0, 255, 0,0.9);
+}
+.Gold-outline {
+  border: 1px solid rgba(206, 177, 14, 0.994);
+}
+.Red-outline {
+  border: 1px solid rgb(255, 30, 0,0.9);
+}
+.Purple-outline {
+  border: 1px solid rgb(197, 5, 197,0.8);
+}
+.Black-outline {
+  border: 1px solid  black;
+}
+.White-outline {
+  border: 1px solid  #ddd;
+}
+
 
 .low-glow {
   filter: drop-shadow(0 0 0.5rem rgb(222, 222, 222,0.8));
@@ -228,7 +253,7 @@ a {
 
 
 
-.team {
+.team, .bracket {
   position:fixed;
   top:48px;
   left:0px;
@@ -287,4 +312,34 @@ a {
 
 .portrait-id span.Black {
   filter: drop-shadow(0 0 0.1rem rgb(130, 130, 130));
+}
+.bracket-image {
+  height:25px;
+  width:25px;
+  border-radius:20px;
+  display:inline;
+  float:left;
+  margin-top:3px;
+  margin-left:3px;
+}
+.bracket-score {
+  float:left;
+  padding-top:9px;
+  margin-right:9px;
+  margin-left:9px;
+  font-size:9px;
+}
+.won {
+  color:lime;
+  font-weight:bold;
+}
+.lost {
+  color:red;
+}
+.bracket {
+  overflow:scroll;
+  height:100%;
+  top:0px;
+  left: 0;
+  padding-top:20px;
 }

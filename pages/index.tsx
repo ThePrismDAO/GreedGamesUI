@@ -66,7 +66,8 @@ function Home() {
                   </li>
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href={prismDAOMembershipEtherscan} target="_BLANK" rel="noopener noreferrer">Contract</a>
-                  </li> 
+                  </li>
+
                 </ul>
 
               </div>
