@@ -81,7 +81,9 @@ const AppContent = ({account, library, chain, numTokensOwned, gameStatus, setGam
 
     // show the team select page
     if(gameStatus == "ViewBracket") {
-        return  <ViewBracket />
+        return  (
+            <ViewBracket />
+        );
     }
     
     return <h2>Error...</h2>

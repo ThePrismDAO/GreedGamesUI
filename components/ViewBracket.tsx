@@ -43,12 +43,13 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 const ViewBracket = () => {
   
   const { data, error } = useSWR("https://member.greed.games/teams/", fetcher);
-  if (error) return "An error has occurred. "+error;
-  if (!data) return "Loading...";
+  //if (error) return "An error has occurred. "+error;
+  //if (!data) return "Loading...";
   const rounds: RoundProps[] = data;
   return (
     <div>
         <div className="bracket">
+            
             <Bracket rounds={rounds} renderSeedComponent={RenderSeed} roundTitleComponent={RoundTitle} swipeableProps={{ enableMouseEvents: true, animateHeight: true }} />
         </div>
     </div>
