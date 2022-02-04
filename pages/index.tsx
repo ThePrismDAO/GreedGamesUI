@@ -29,6 +29,11 @@ function Home() {
     setBarWidth( (numTokensMinted / numTokensAvailable * 100) + "%")
   }, [numTokensAvailable, numTokensMinted])
 
+   /*
+                  <li className="mr-0">
+                    <a className="text-white hover:opacity-70" onClick={()=>{setGameStatus("ViewBracket")}} href='#'>Games</a>
+                  </li>*/  
+                  
   return (
     <div>
       <Head>
@@ -67,9 +72,7 @@ function Home() {
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href={prismDAOMembershipEtherscan} target="_BLANK" rel="noopener noreferrer">Contract</a>
                   </li>
-                  <li className="mr-0">
-                    <a className="text-white hover:opacity-70" onClick={()=>{setGameStatus("ViewBracket")}} href='#'>Games</a>
-                  </li>  
+                 
                 </ul>
 
               </div>
