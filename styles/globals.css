@@ -97,6 +97,9 @@ a {
 .portrait:hover img {
   filter: contrast(100%);
 }
+.portrait:hover .portrait-rarity{
+  display:inline; 
+}
 .portrait-container{
   z-index:100;
   height:497px;
@@ -128,6 +131,46 @@ a {
   text-align:right;
   z-index:200;
 }
+.portrait-rarity {
+  position:absolute;
+  bottom:24px;
+  right:15px;
+  font-size:15px;
+  text-align:right;
+  z-index:200;
+  font-weight:bold;
+  display:none;
+}
+
+.Rare {
+  color:rgb(0, 93, 214);
+}
+.Epic {
+  color:rgb(255, 51, 255);
+}
+.Legendary {
+  color:rgb(255, 128, 9);
+}
+
+.Rare-outline {
+  border: 1px solid rgb(0, 93, 214);
+}
+.Epic-outline {
+  border: 1px solid rgb(255, 51, 255);
+}
+.Legendary-outline {
+  border: 1px solid rgb(255, 128, 9);
+}
+
+.Rare-glow {
+  filter: drop-shadow(0 0 0.75rem rgb(0, 93, 214));
+}
+.Epic-glow {
+  filter: drop-shadow(0 0 0.75rem rgb(255, 51, 255));
+}
+.Legendary-glow {
+  filter: drop-shadow(0 0 0.75rem rgb(0, 93, 214));
+}
 
 .Blue {
   color:rgb(0, 123, 255);
@@ -136,7 +179,7 @@ a {
   color:rgb(0, 255, 0);
 }
 .Gold {
-  color:rgba(206, 177, 14, 0.994);
+  color:rgba(253, 152, 0, 0.994);
 }
 .Red {
   color:rgb(255, 30, 0);
@@ -151,9 +194,7 @@ a {
   color: #eee;
 }
 
-.small-outline {
-  
-}
+
 .Blue-outline {
   border: 1px solid rgb(0, 123, 255,0.8);
 }
@@ -313,6 +354,7 @@ a {
 .portrait-id span.Black {
   filter: drop-shadow(0 0 0.1rem rgb(130, 130, 130));
 }
+
 .bracket-image {
   height:25px;
   width:25px;

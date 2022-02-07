@@ -1,20 +1,18 @@
- 
- import useSWR from "swr";
- import type { PrismDAOMembership } from "../contracts/types";
- import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
- import usePrismDAOMembershipContract from "./usePrismDAOMembershipContract";
- import { SetStateAction, useEffect, useState } from "react";
+import useSWR from "swr";
+import type { PrismDAOMembership } from "../contracts/types";
+import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
+import usePrismDAOMembershipContract from "./usePrismDAOMembershipContract";
+import { SetStateAction, useEffect, useState } from "react";
 
-function updateTokenValue(index, tokens, setTokens, value) {
+function updateTokenValue(index, attribute, tokens, setTokens, value) {
     // update the tokens owner with the owner address once we get that value
-    tokens[index]["owner"] = value;
+    tokens[index][attribute] = value;
     setTokens(tokens);
 }
 
  function getTokens(contract: PrismDAOMembership, ownerAddress: string, tokenAPIUri: string, tokens, setTokens) {
    return async (_: string) => {
        const totalSupply = await contract.totalSupply();
-   
        // get ownership info of each token
        const guilds = ["Blue","Red","Green","White","Purple","Gold","Black"];
    
@@ -31,7 +29,8 @@ function updateTokenValue(index, tokens, setTokens, value) {
             // this waits for the owner information then updates the tokens state when it gets in
             if(totalSupply !== undefined) {
                 for (var i = 0; i < totalSupply.toNumber(); i++) {
-                    contract.ownerOf(i).then(updateTokenValue.bind(null, i, tokens, setTokens));
+                  // get the owner
+                  contract.ownerOf(i).then(updateTokenValue.bind(null, i, "owner", tokens, setTokens));
                 }
             }
         }
@@ -39,7 +38,7 @@ function updateTokenValue(index, tokens, setTokens, value) {
        return tokens;
    };
  }
- 
+
  export default function usePrismDAOTokens(
    contractAddress: string,
    ownerAddress: string,
@@ -62,7 +61,7 @@ function updateTokenValue(index, tokens, setTokens, value) {
      }
    );
  
-   useKeepSWRDataLiveAsBlocksArrive(result.mutate);
+   useKeepSWRDataLiveAsBlocksArrive(result.mutate)
 
    return result;
  }
