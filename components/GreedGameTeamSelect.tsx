@@ -157,15 +157,13 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
             <div className="team-portraits">
                 <div className='portrait-container'>
                     <div className={teamSlot1['guild']+"-glow portrait "+teamSlot1Status} id="team-1">
-                        <div className="portrait-label glow"><span className={teamSlot1['guild']}><span className={teamSlot1['thirdGuild']}>{teamSlot1['thirdGuild']}</span> 
-                        <span className={teamSlot1['secondGuild']}>{teamSlot1['secondGuild']}</span>  {teamSlot1['guild']} {teamSlot1['class']}</span></div>
+                        <div className="portrait-label glow"><span className={teamSlot1['guild']}><span className={teamSlot1['thirdGuild']}>{teamSlot1['thirdGuild']}</span> <span className={teamSlot1['secondGuild']}>{teamSlot1['secondGuild']}</span>  {teamSlot1['guild']} {teamSlot1['class']}</span></div>
                         <div className="portrait-id"><span className={teamSlot1['guild']}> {teamSlot1['id']}</span></div>
                         <div className="portrait-rarity low-glow"><span className={teamSlot1['rarity']}> {teamSlot1['rarity']}</span></div>
                         <img src={teamSlot1['image']} onClick={() => onTeamPortraitClick(1)} />
                     </div>
                     <div className={teamSlot2['guild']+"-glow portrait "+teamSlot2Status} id="team-2">
-                    <div className="portrait-label glow"><span className={teamSlot2['guild']}><span className={teamSlot2['thirdGuild']}>{teamSlot2['thirdGuild']}</span> 
-                        <span className={teamSlot2['secondGuild']}>{teamSlot2['secondGuild']}</span>  {teamSlot2['guild']} {teamSlot2['class']}</span></div>
+                    <div className="portrait-label glow"><span className={teamSlot2['guild']}><span className={teamSlot2['thirdGuild']}>{teamSlot2['thirdGuild']}</span> <span className={teamSlot2['secondGuild']}>{teamSlot2['secondGuild']}</span>  {teamSlot2['guild']} {teamSlot2['class']}</span></div>
                         <div className="portrait-id"><span className={teamSlot2['guild']}> {teamSlot2['id']}</span></div>
                         <div className="portrait-rarity low-glow"><span className={teamSlot2['rarity']}> {teamSlot2['rarity']}</span></div>
                         <img src={teamSlot2['image']} onClick={() => onTeamPortraitClick(2)} />

@@ -308,6 +308,7 @@ a {
   position: fixed;
     top: 180px;
     left: 0px;
+    width:100%;
 }
 
 .clear {
@@ -344,6 +345,11 @@ a {
 .register-team-button.active {
   color:gold;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.team-stats {
+ width:470px;
 }
 
 
@@ -384,4 +390,21 @@ a {
   top:0px;
   left: 0;
   padding-top:20px;
+}
+
+
+.Assassin {
+  color:#555;
+}
+.Tank {
+  color:khaki;
+}
+.Healer {
+  color:hotpink;
+}
+.Mage {
+  color:orange;
+}
+.Fighter {
+  color:indianred;
 }
