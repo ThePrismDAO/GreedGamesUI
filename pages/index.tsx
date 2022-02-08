@@ -18,6 +18,7 @@ function Home() {
   const [numTokensToMint, setNumTokensToMint] = useState(10);
   const [mintPriceEth, setMintPrice] = useState(0.001);
   const [prismDAOMembershipEtherscan, setPrismDAOMembershipEtherscan] = useState("");
+  const [prismDAOMembershipContractAddress, setPrismDAOMembershipContractAddress] = useState("");
   const [chain, setChain] = useState("");
   const [faucet, setFaucet] = useState("https://faucets.chain.link/");
   const [numTokensOwned, setNumTokensOwned] = useState(1);
@@ -33,7 +34,6 @@ function Home() {
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" onClick={()=>{setGameStatus("ViewBracket")}} href='#'>Games</a>
                   </li>*/  
-                  
   return (
     <div>
       <Head>
@@ -82,12 +82,12 @@ function Home() {
           <main role="main" className="w-full">
             <div className='flex relative justify-center main-container'>
               <div className="bg-black/10 blur-lg absolute h-80 w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12  sm:bg-black/40 "></div>
-              <AppContent account={account} library={library} chain={chain} numTokensOwned={numTokensOwned} gameStatus={gameStatus} setGameStatus={setGameStatus} tokenAPIUri={tokenAPIUri} numTokensMinted={numTokensMinted} numTokensAvailable={numTokensAvailable} barWidth={barWidth} numTokensToMint={numTokensToMint} setNumTokensToMint={setNumTokensToMint} mintPriceEth={mintPriceEth} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} />
+              <AppContent account={account} library={library} chain={chain} prismDAOMembershipContractAddress={prismDAOMembershipContractAddress} numTokensOwned={numTokensOwned} gameStatus={gameStatus} setGameStatus={setGameStatus} tokenAPIUri={tokenAPIUri} numTokensMinted={numTokensMinted} numTokensAvailable={numTokensAvailable} barWidth={barWidth} numTokensToMint={numTokensToMint} setNumTokensToMint={setNumTokensToMint} mintPriceEth={mintPriceEth} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} />
       
             </div>
           </main>
         </div>
-        <div className="network-status"> <ETHBalance chain={chain} setChain={setChain} setFaucet={setFaucet} /></div>
+        <div className="network-status"> <ETHBalance chain={chain} setChain={setChain} setFaucet={setFaucet} tokenAPIUri={tokenAPIUri} setContractAddress={setPrismDAOMembershipContractAddress} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} mintPriceEth={mintPriceEth} /></div>
       </Background>
       {/* <style jsx>{`
         nav {

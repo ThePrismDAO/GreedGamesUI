@@ -2,14 +2,20 @@ import type { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import useETHBalance from "../hooks/useETHBalance";
 import { parseBalance } from "../util";
+import usePrismDAOMembershipStatus from "../hooks/usePrismDAOMembershipStatus";
 
-const ETHBalance = ({chain, setChain, setFaucet}) => {
+const ETHBalance = ({chain, setChain, setFaucet, tokenAPIUri, setContractAddress, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned, mintPriceEth}) => {
   const { library, account, chainId } = useWeb3React<Web3Provider>();
   const { data } = useETHBalance(account);
 
   let chainMsg = "Switch to Rinkeby to mint";
   let faucet = "https://faucets.chain.link/";
   let balance = parseBalance(data ?? "0");
+  let prismDAOMembershipContractAddress = "";
+  let prismDAOMembershipEtherscan = "";
+  let totalSupply = 0;
+  let maxSupply = 3000;
+  let numTokensOwned = 0;
 
   if(chain != "") {
     chainMsg = chain;
@@ -18,10 +24,14 @@ const ETHBalance = ({chain, setChain, setFaucet}) => {
   if(chainId == 42) {
     faucet = "https://faucets.chain.link/kovan";
     chain = "Kovan Testnet";
+    prismDAOMembershipContractAddress = "0xb0178cae4d95e9a85aad5cb40d6c4bcc4a0e741c";
+      prismDAOMembershipEtherscan = "https://kovan.etherscan.io/token/"+prismDAOMembershipContractAddress;
   }
   if(chainId == 4) {
     faucet = "https://faucets.chain.link/rinkeby";
     chain = "Rinkeby Testnet";
+    prismDAOMembershipContractAddress = "0x35662DA30BdD0Dd99962C9D91548675b63Ca77Fb";
+    prismDAOMembershipEtherscan = "https://rinkeby.etherscan.io/token/"+prismDAOMembershipContractAddress;
   }
   if(chainId == 1) {
     faucet = "https://faucets.chain.link/";
@@ -40,6 +50,24 @@ const ETHBalance = ({chain, setChain, setFaucet}) => {
   // set the chain state everything else uses
   setChain(chain);
   setFaucet(faucet);
+ 
+  // update the status of the contract
+  const memberStatus = usePrismDAOMembershipStatus(prismDAOMembershipContractAddress, account, tokenAPIUri).data;
+  if(memberStatus !== undefined) {
+    totalSupply = memberStatus['totalSupply'];
+    maxSupply = memberStatus['maxSupply'];
+    mintPriceEth = memberStatus['mintPrice'];
+    numTokensOwned = memberStatus['tokensOwned'];
+  }
+
+  // update the interface in index
+  //setBaseURI(baseURI);
+  setTotalSupply(totalSupply);
+  setMaxSupply(maxSupply);
+  setMintPrice(mintPriceEth);
+  setPrismDAOMembershipEtherscan(prismDAOMembershipEtherscan);
+  setNumTokensOwned(numTokensOwned);
+  setContractAddress(prismDAOMembershipContractAddress);
 
   return (
     <div>

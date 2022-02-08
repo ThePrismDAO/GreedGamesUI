@@ -119,8 +119,6 @@ const TeamStats = ({p1, p2, p3}) => {
         if(teamClassBonus[key] > 0) showClassPenalty = true;
     });
 
-    console.log(teamSynergies);
-
     return (
         <div>
         <div className='team-stats bg-white/40 blur-2xl absolute h-40 w-10/12 md:w-8/12 lg:w-40/80 2xl:w-6/24 z-0'></div>

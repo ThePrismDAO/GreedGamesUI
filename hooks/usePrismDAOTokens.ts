@@ -2,7 +2,7 @@ import useSWR from "swr";
 import type { PrismDAOMembership } from "../contracts/types";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 import usePrismDAOMembershipContract from "./usePrismDAOMembershipContract";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function updateTokenValue(index, attribute, tokens, setTokens, value) {
     // update the tokens owner with the owner address once we get that value
@@ -39,30 +39,47 @@ function updateTokenValue(index, attribute, tokens, setTokens, value) {
    };
  }
 
+ function updateTokens(contractAddress: string, ownerAddress: string, tokenAPIUri: string, numTokensOwned: number, suspense = false, tokens, setTokens) {
+    const contract = usePrismDAOMembershipContract(contractAddress);
+
+    const shouldFetch =
+      typeof contractAddress === "string" &&
+      !!contract;
+
+    const result = useSWR(
+      shouldFetch ? ["PrismDAOTokens", contractAddress, numTokensOwned] : null,
+      getTokens(contract, ownerAddress, tokenAPIUri, tokens, setTokens),
+      {
+        suspense,
+      }
+    );
+
+    useKeepSWRDataLiveAsBlocksArrive(result.mutate)
+
+    // return empty if we dont have the data, return the data if we do
+    let r = [];
+    if(result.data !== undefined) r = result.data;
+
+    return r;
+ }
+
  export default function usePrismDAOTokens(
    contractAddress: string,
    ownerAddress: string,
    tokenAPIUri: string,
+   numTokensOwned: number,
    suspense = false
  ) {
    const [tokens, setTokens] = useState([]);
+   let r = updateTokens(contractAddress, ownerAddress,tokenAPIUri, numTokensOwned, suspense, tokens, setTokens);
    
-   const contract = usePrismDAOMembershipContract(contractAddress);
+   // use effect to keep the token data updated
+   useEffect(() => {
+      // get the oken ownership data and pass it through to the team select page
+      console.log("Num tokens owned changed",numTokensOwned);
+      
+   }, [numTokensOwned]);
 
-   const shouldFetch =
-     typeof contractAddress === "string" &&
-     !!contract;
- 
-   const result = useSWR(
-     shouldFetch ? ["PrismDAOTokens", contractAddress] : null,
-     getTokens(contract, ownerAddress, tokenAPIUri, tokens, setTokens),
-     {
-       suspense,
-     }
-   );
- 
-   useKeepSWRDataLiveAsBlocksArrive(result.mutate)
-
-   return result;
+   return tokens;
  }
  

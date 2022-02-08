@@ -1,19 +1,13 @@
 import GreedGameTeamButton from "./GreedGameTeamButton";
-import PrismDAOMembershipStatus from "./PrismDAOMembershipStatus";
+import PrismDAOMembershipMint from "./PrismDAOMembershipMint";
 import GreedGameTeamSelect from "./GreedGameTeamSelect";
 import { useEffect, useState } from "react";
 import usePrismDAOTokens from "../hooks/usePrismDAOTokens";
 import ViewBracket from "./ViewBracket";
 
-const AppContent = ({account, library, chain, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned}) => {
-    // set up state for the contract address to reusue it for both the token ownership info and the rest of the contract state
-    const [contractAddress, setContractAddress] = useState("");
-
-    // get the oken ownership data and pass it through to the team select page
-    const tokenData = usePrismDAOTokens(contractAddress, account, tokenAPIUri);
-    let tokens = [];
-    if(tokenData.data !== undefined) tokens = tokenData.data;
-
+const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned}) => {
+    const tokens = usePrismDAOTokens(prismDAOMembershipContractAddress, account, tokenAPIUri, numTokensOwned);
+   
 
     // the default message when you havent connected metamask yet
     if(gameStatus == "Unconnected") {
@@ -57,8 +51,7 @@ const AppContent = ({account, library, chain, numTokensOwned, gameStatus, setGam
                     for <span className="text-green-400 font-medium">{mintPriceEth*numTokensToMint}</span> ETH
                 </div>
                 <div className="text-center mt-5">
-                    <PrismDAOMembershipStatus tokenAPIUri={tokenAPIUri} setContractAddress={setContractAddress} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} numTokensToMint={numTokensToMint} mintPriceEth={mintPriceEth} />
-                
+                    <PrismDAOMembershipMint prismDAOMembershipContractAddress={prismDAOMembershipContractAddress} numTokensToMint={numTokensToMint} mintPriceEth={mintPriceEth} /> 
                 </div>
                 <div className="text-center py-4 lg:px-4 w-full">
                     <div className="py-2 px-4 bg-black/20 items-center text-white leading-none inline-flex rounded-full " role="alert">
