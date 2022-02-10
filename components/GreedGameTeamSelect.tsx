@@ -13,7 +13,7 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
     const [teamString, setTeamString] = useState("");
 
     // create vars for all of the team slots and give default blank data
-    const defaultSlotData = {"image":"https://member.greed.games/portraits/trash/220117-162435_735672_lg500_tuning_images--.png","id":"","guild":"Select","rarity":""};
+    const defaultSlotData = {"image":"https://member.greed.games/i/blank.png","id":"","guild":"Select","rarity":""};
     const [teamSlot1, setTeamSlot1] = useState(defaultSlotData);
     const [teamSlot1Status, setTeamSlot1status] = useState("unselected");
     const [teamSlot2, setTeamSlot2] = useState(defaultSlotData);
@@ -66,7 +66,8 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
                 setTeamSlot3status("selected");
 
                 // make register button active
-                setRegisterActive("active");
+                // make this live later
+                //setRegisterActive("active");
             }
         }
     }
@@ -97,10 +98,12 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
     if(tokens.length > 0 && numTokensOwned > 0) { 
         listTokens = tokens.map((t) => {
             if(t.owner == account) {
-                let attributeClass = "";
+                let attributeClass = "Gladiator";
                 let attributeGuild2 = "";
                 let attributeGuild3 = "";
-                let attributeRarity = "Rare";
+                // change when live
+                //let attributeRarity = "Rare";
+                let attributeRarity = "Unrevealed";
                
                 if(tokenAttributes.length > 0) {
                     const attributesLen = tokenAttributes[t.tokenIndex]?.attributes.length;
@@ -139,7 +142,9 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
     }
 
     // get the mint tx call to pass as an onclick event
-    const callSign = useSignTeam(library, "team: "+teamString);
+    // when we go live turn this back on
+    //const callSign = useSignTeam(library, "team: "+teamString);
+    const callSign = () => { return };
 
     return (
         <div>
@@ -147,7 +152,7 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
                 <div className="portraits-title">YOUR TEAM 
                     <div className="float-right py-30 relative">
                         <button 
-                className={registerActive+" px-3 py-1 text-lg lg:text-x1 lg:px-6 lg:py-2 xl:text-lg xl:px-5 xl:py-2 font-medium text-white rounded-sm outline outline-2 z-10 register-team-button"}
+                className={registerActive+" px-3 py-1 text-lg lg:text-x1 lg:px-6 lg:py-2 xl:text-lg xl:px-5 xl:py-2 font-medium text-white rounded-sm outline outline-2 z-10 register-team-button inactive"}
                 onClick={() => callSign()}
             >Register team with the Gameskeeper →</button>
                     </div> 

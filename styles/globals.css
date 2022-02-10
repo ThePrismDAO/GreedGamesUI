@@ -408,3 +408,12 @@ a {
 .Fighter {
   color:indianred;
 }
+
+
+/* remove this when going live */
+.portrait-id {
+  display:none;
+}
+.portrait:hover .portrait-rarity {
+bottom:78px;
+}
