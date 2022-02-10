@@ -415,5 +415,6 @@ a {
   display:none;
 }
 .portrait:hover .portrait-rarity {
-bottom:78px;
+bottom:76px;
+font-size:12px;
 }
