@@ -7,24 +7,6 @@ import Background from "../components/Background";
 import AppContent from "../components/AppContent";
 import { useEffect, useState } from "react";
 import { FaDiscord, FaTwitter, FaMedium} from 'react-icons/fa';
-import usePrismDAOMembershipContract from "../hooks/usePrismDAOMembershipContract";
-import usePrismDAOTotalSupply from "../hooks/usePrismDAOTotalSupply";
-
-enum Guild {
-  Blue = "Blue",
-  Red = "Blue",
-  Green = "Blue",
-  White = "Blue",
-  Purple = "Blue",
-  Gold = "Blue",
-  Black = "Blue",
-}
-
-type Token = {
-  tokenIndex: number;
-  owner: string;
-  guild: Guild;
-}
 
 function Home() {
   const { account, library } = useWeb3React();
@@ -43,34 +25,10 @@ function Home() {
   const [gameStatus, setGameStatus] = useState("Unconnected");
   
   const tokenAPIUri = "https://member.greed.games/";
-  
-  const contract = usePrismDAOMembershipContract(prismDAOMembershipContractAddress);
-  const { data: totalSupply } = usePrismDAOTotalSupply(prismDAOMembershipContractAddress);
-  const [tokens, setTokens] = useState<Token[]>([]);
 
   useEffect(() => {
     setBarWidth( (numTokensMinted / numTokensAvailable * 100) + "%")
   }, [numTokensAvailable, numTokensMinted])
-
-  useEffect
-
-  useEffect(() => {
-      if(totalSupply){
-          console.log("tokens", tokens);
-              console.log('totalSupply', totalSupply);
-              for(var i = tokens.length; i < totalSupply; i++){
-                  contract.ownerOf(i).then((ownerAddress) => {
-                      const token: Token = {
-                          tokenIndex: i,
-                          owner: ownerAddress,
-                          guild: Guild[i % 7]
-                      };
-                      setTokens(state => [...state, token]);
-                  })
-                  
-              }
-      }
-  }, [contract, totalSupply]);
 
    /*
                   <li className="mr-0">
@@ -124,7 +82,7 @@ function Home() {
           <main role="main" className="w-full">
             <div className='flex relative justify-center main-container'>
               <div className="bg-black/10 blur-lg absolute h-80 w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12  sm:bg-black/40 "></div>
-              <AppContent account={account} library={library} chain={chain} prismDAOMembershipContractAddress={prismDAOMembershipContractAddress} numTokensOwned={numTokensOwned} gameStatus={gameStatus} setGameStatus={setGameStatus} tokenAPIUri={tokenAPIUri} numTokensMinted={numTokensMinted} numTokensAvailable={numTokensAvailable} barWidth={barWidth} numTokensToMint={numTokensToMint} setNumTokensToMint={setNumTokensToMint} mintPriceEth={mintPriceEth} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} tokens={tokens}/>
+              <AppContent account={account} library={library} chain={chain} prismDAOMembershipContractAddress={prismDAOMembershipContractAddress} numTokensOwned={numTokensOwned} gameStatus={gameStatus} setGameStatus={setGameStatus} tokenAPIUri={tokenAPIUri} numTokensMinted={numTokensMinted} numTokensAvailable={numTokensAvailable} barWidth={barWidth} numTokensToMint={numTokensToMint} setNumTokensToMint={setNumTokensToMint} mintPriceEth={mintPriceEth} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} />
       
             </div>
           </main>

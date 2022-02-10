@@ -2,14 +2,16 @@ import GreedGameTeamButton from "./GreedGameTeamButton";
 import PrismDAOMembershipMint from "./PrismDAOMembershipMint";
 import GreedGameTeamSelect from "./GreedGameTeamSelect";
 import { useEffect, useState } from "react";
-import usePrismDAOTokens from "../hooks/usePrismDAOTotalSupply";
+import usePrismDAOTokens from "../hooks/usePrismDAOTokens";
 import ViewBracket from "./ViewBracket";
 
-const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned, tokens}) => {
-    
+const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned}) => {
+    const tokens = usePrismDAOTokens(prismDAOMembershipContractAddress, account, tokenAPIUri, numTokensOwned);
+   
+
     // the default message when you havent connected metamask yet
     if(gameStatus == "Unconnected") {
-        if((chain == "Rinkeby Testnet" || chain == "Kovan Testnet")&& gameStatus !== "Minting") {
+        if(chain == "Rinkeby Testnet" && gameStatus !== "Minting") {
             setGameStatus("Minting");
         } else {
             return(
