@@ -1,15 +1,14 @@
 import GreedGameTeamButton from "./GreedGameTeamButton";
 import PrismDAOMembershipMint from "./PrismDAOMembershipMint";
 import GreedGameTeamSelect from "./GreedGameTeamSelect";
-import { useEffect, useState } from "react";
-import usePrismDAOTokens from "../hooks/usePrismDAOTokens";
 import ViewBracket from "./ViewBracket";
 import { useRouter } from 'next/router'
-
+import Countdown from 'react-countdown';
 
 const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned, tokens}) => {
     const router = useRouter()
     let isLive = false;
+    // white list param
     if(router.query['w'] == "1a9dk233kdj1095Dfkas") isLive = true;
 
     let unconnected = false;
@@ -18,7 +17,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
     } else {
         if(chain !== "Ethereum Mainnet") unconnected = true;
     }
-
+    const Complete = () => <span><b>Connect your MetaMask</b> to Ethereum to begin</span>
     // the default message when you havent connected metamask yet
     if(gameStatus == "Unconnected") {
         if(!unconnected && gameStatus !== "Minting") {
@@ -27,13 +26,18 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
             if (isLive) {
                 return(
                     <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
-                        <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center"><b>Connect your MetaMask</b> to Ethereum to begin</div>
+                        <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center"><Complete></Complete></div>
                     </div>
                 )
             } else {
                 return(
                     <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
-                        <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center">Connect your MetaMask to the <span className="text-green-400 font-bold drop-shadow-md shadow-black">Rinkeby test network</span> to begin</div>
+                        <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-20 font-normal leading-normal mt-20 text-center">
+                            Minting goes live in 
+                            <div className="font-bold mt-5 lg:text-6xl text-green-400">
+                                <Countdown date={new Date(1644620400*1000)}><Complete></Complete></Countdown>
+                            </div>
+                        </div>
                     </div>
                 )
             }
