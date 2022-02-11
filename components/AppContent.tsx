@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import usePrismDAOTokens from "../hooks/usePrismDAOTokens";
 import ViewBracket from "./ViewBracket";
 
-const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned}) => {
-    const tokens = usePrismDAOTokens(prismDAOMembershipContractAddress, account, tokenAPIUri, numTokensOwned);
+const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned, tokens}) => {
    
 
     // the default message when you havent connected metamask yet
