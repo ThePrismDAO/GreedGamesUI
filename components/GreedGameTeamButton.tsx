@@ -14,7 +14,7 @@ const GreedGameTeamButton = ({numTokensOwned, setGameStatus}) => {
       // otherwiseshow they own 0
       return (
           <div className="text-center text-white font-normal text-lg mb-5">
-              <div>Select the number to mint and press <span className="text-green-400 font-bold drop-shadow-md shadow-black">Mint Gladiators</span> to play.</div>
+              <div>Select the number to mint (3 gladiators form a Greed Games Team) and press <span className="text-green-400 font-bold drop-shadow-md shadow-black">Mint Gladiators</span> to mint your team.</div>
           </div>
       )
   }
