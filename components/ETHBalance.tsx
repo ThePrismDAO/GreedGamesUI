@@ -34,8 +34,10 @@ const ETHBalance = ({chain, setChain, setFaucet, tokenAPIUri, setContractAddress
     prismDAOMembershipEtherscan = "https://rinkeby.etherscan.io/token/"+prismDAOMembershipContractAddress;
   }
   if(chainId == 1) {
-    faucet = "https://faucets.chain.link/";
-    chain = "Ethereum Mainnet] [Switch to Rinkby to mint";
+    faucet = "";
+    chain = "Ethereum Mainnet";
+    prismDAOMembershipContractAddress = "0x38d6a323ca5e083d7f53eab61d8ac41e58de2146";
+    prismDAOMembershipEtherscan = "https://etherscan.io/token/"+prismDAOMembershipContractAddress;
   } else {
     // show message if they arent on main net to get eth
     if(parseFloat(balance) < 0.02) {
@@ -69,10 +71,12 @@ const ETHBalance = ({chain, setChain, setFaucet, tokenAPIUri, setContractAddress
   setNumTokensOwned(numTokensOwned);
   setContractAddress(prismDAOMembershipContractAddress);
 
+  const faucetComponent = <p><a className="text-white hover:opacity-70 text-green-300" href={faucet} target="_BLANK" rel="noopener noreferrer">{chain} Faucet</a></p>
+
   return (
     <div>
       <p><b>[{chainMsg}]</b></p>
-      <p><a className="text-white hover:opacity-70 text-green-300" href={faucet} target="_BLANK" rel="noopener noreferrer">{chain} Faucet</a></p>
+      {chainId > 1 ? faucetComponent : ""}
       <p>Balance: Ξ{balance} </p>
     </div>
   )

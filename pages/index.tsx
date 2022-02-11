@@ -10,6 +10,7 @@ import { FaDiscord, FaTwitter, FaMedium} from 'react-icons/fa';
 import usePrismDAOMembershipContract from "../hooks/usePrismDAOMembershipContract";
 import usePrismDAOMembershipStatus from "../hooks/usePrismDAOMembershipStatus";
 
+
 enum Guild {
   Blue,
   Red,
@@ -84,6 +85,7 @@ function Home() {
   }, [membershipData]);
  
   return (
+    
     <div>
       <Head>
         <title>GREED GAMES</title>

@@ -4,28 +4,46 @@ import GreedGameTeamSelect from "./GreedGameTeamSelect";
 import { useEffect, useState } from "react";
 import usePrismDAOTokens from "../hooks/usePrismDAOTokens";
 import ViewBracket from "./ViewBracket";
+import { useRouter } from 'next/router'
+
 
 const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned, tokens}) => {
-   
+    const router = useRouter()
+    let isLive = false;
+    if(router.query['w'] == "1a9dk233kdj1095Dfkas") isLive = true;
+
+    let unconnected = false;
+    if(!isLive) {
+        if(chain !== "Rinkeby Testnet" && chain !== "Kovan Testnet") unconnected = true;
+    } else {
+        if(chain !== "Ethereum Mainnet") unconnected = true;
+    }
 
     // the default message when you havent connected metamask yet
     if(gameStatus == "Unconnected") {
-        if(chain == "Rinkeby Testnet" && gameStatus !== "Minting") {
+        if(!unconnected && gameStatus !== "Minting") {
             setGameStatus("Minting");
         } else {
-            return(
-                <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
-                    <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center">Connect your MetaMask to the <span className="text-green-400 font-bold drop-shadow-md shadow-black">Rinkeby test network</span> to begin</div>
-                </div>
-            )
+            if (isLive) {
+                return(
+                    <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
+                        <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center"><b>Connect your MetaMask</b> to Ethereum to begin</div>
+                    </div>
+                )
+            } else {
+                return(
+                    <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
+                        <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center">Connect your MetaMask to the <span className="text-green-400 font-bold drop-shadow-md shadow-black">Rinkeby test network</span> to begin</div>
+                    </div>
+                )
+            }
+            
         }
     }
 
     // show the minting page
     if(gameStatus == "Minting") {
-        if(chain !== "Rinkeby Testnet" && chain !== "Kovan Testnet") {
-            setGameStatus("Unconnected");
-        }
+        if(unconnected) setGameStatus("Unconnected");
         const minting = <div>
             <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-white font-medium text-center">
                 Mint{" "}
@@ -74,7 +92,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
 
     // show the team select page
     if(gameStatus == "AssembleTeam") {
-        if(chain !== "Rinkeby Testnet" && chain !== "Kovan Testnet") {
+        if(unconnected) {
             setGameStatus("Unconnected");
         }
         return (
