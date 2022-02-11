@@ -5,6 +5,7 @@ export default function usePrismDAOAttributes() {
    const { data, error } = useSWR("https://member.greed.games/collection/", fetcher);
    if (error) return "An error has occurred. "+error;
    if (!data) return "Loading...";
+
    return data;
 }
  

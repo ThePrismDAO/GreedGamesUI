@@ -7,6 +7,7 @@ import usePrismDAOAttributes from "../hooks/usePrismDAOAttributes"
 const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokensOwned, tokenAPIUri}) => {
     // get the attributes data
     let tokenAttributes = usePrismDAOAttributes();
+    
 
     // for state of register button
     const [registerActive, setRegisterActive] = useState("");
@@ -93,9 +94,9 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
     }
 
     let listTokens: JSX.Element[];
-
+   
     // the component for each token you could select
-    if(tokens.length > 0 && numTokensOwned > 0) { 
+    if(tokens.length > 0 && numTokensOwned > 0 && tokenAttributes !== "Loading...") { 
         listTokens = tokens.map((t) => {
             if(t.owner == account) {
                 let attributeClass = "Gladiator";
@@ -106,6 +107,7 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
                 let attributeRarity = "Unrevealed";
                
                 if(tokenAttributes.length > 0) {
+                    
                     const attributesLen = tokenAttributes[t.tokenIndex]?.attributes.length;
                     
                     if (attributesLen == 3) attributeClass = tokenAttributes[t.tokenIndex].attributes[1]['value'];
