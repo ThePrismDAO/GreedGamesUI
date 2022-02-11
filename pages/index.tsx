@@ -7,6 +7,24 @@ import Background from "../components/Background";
 import AppContent from "../components/AppContent";
 import { useEffect, useState } from "react";
 import { FaDiscord, FaTwitter, FaMedium} from 'react-icons/fa';
+import usePrismDAOMembershipContract from "../hooks/usePrismDAOMembershipContract";
+import usePrismDAOMembershipStatus from "../hooks/usePrismDAOMembershipStatus";
+
+enum Guild {
+  Blue,
+  Red,
+  Green,
+  White,
+  Purple,
+  Gold,
+  Black,
+}
+
+type Token = {
+  tokenIndex: number;
+  owner: string;
+  guild: string;
+}
 
 function Home() {
   const { account, library } = useWeb3React();
@@ -26,14 +44,45 @@ function Home() {
   
   const tokenAPIUri = "https://member.greed.games/";
 
+  const contract = usePrismDAOMembershipContract(prismDAOMembershipContractAddress);
+  const { data: membershipData } = usePrismDAOMembershipStatus(prismDAOMembershipContractAddress, account, tokenAPIUri)
+  const [tokens, setTokens] = useState<Token[]>([]);
+
   useEffect(() => {
     setBarWidth( (numTokensMinted / numTokensAvailable * 100) + "%")
   }, [numTokensAvailable, numTokensMinted])
 
-   /*
-                  <li className="mr-0">
-                    <a className="text-white hover:opacity-70" onClick={()=>{setGameStatus("ViewBracket")}} href='#'>Games</a>
-                  </li>*/  
+  useEffect(() => {
+    const totalSupply = membershipData?.totalSupply;
+    // run this if we totalSupply is greater than the number of tokens we're keeping track of
+    if(contract && totalSupply > tokens.length){
+      console.log('totalSupply', totalSupply);
+      console.log('tokens.length',tokens.length);
+      // iterate so we can add new tokens (w/out owner info at first)
+      for(var i = tokens.length; i < totalSupply; i++){
+        // token w/out owner
+        const token: Token = {
+          tokenIndex: i,
+          owner: '',
+          guild: Guild[i % 7]
+        };
+        
+        // add the token w/out owner
+        setTokens(prevTokens => [...prevTokens, token]);
+
+        // try to get owner of the token
+        contract.ownerOf(i).then((ownerAddress) => {
+          // once we get the owner, update the owner for the token at the correct index
+          setTokens(existingTokens => {
+            return existingTokens.map((token, index) => {
+              return index == i ? {...token, owner: ownerAddress} : token;
+            })
+          })
+        })
+      }
+    }
+  }, [membershipData]);
+ 
   return (
     <div>
       <Head>
@@ -82,12 +131,14 @@ function Home() {
           <main role="main" className="w-full">
             <div className='flex relative justify-center main-container'>
               <div className="bg-black/10 blur-lg absolute h-80 w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12  sm:bg-black/40 "></div>
-              <AppContent account={account} library={library} chain={chain} prismDAOMembershipContractAddress={prismDAOMembershipContractAddress} numTokensOwned={numTokensOwned} gameStatus={gameStatus} setGameStatus={setGameStatus} tokenAPIUri={tokenAPIUri} numTokensMinted={numTokensMinted} numTokensAvailable={numTokensAvailable} barWidth={barWidth} numTokensToMint={numTokensToMint} setNumTokensToMint={setNumTokensToMint} mintPriceEth={mintPriceEth} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} />
+              <AppContent account={account} library={library} chain={chain} prismDAOMembershipContractAddress={prismDAOMembershipContractAddress} numTokensOwned={numTokensOwned} gameStatus={gameStatus} setGameStatus={setGameStatus} tokenAPIUri={tokenAPIUri} numTokensMinted={numTokensMinted} numTokensAvailable={numTokensAvailable} barWidth={barWidth} numTokensToMint={numTokensToMint} setNumTokensToMint={setNumTokensToMint} mintPriceEth={mintPriceEth} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} tokens={tokens} />
       
             </div>
           </main>
         </div>
-        <div className="network-status"> <ETHBalance chain={chain} setChain={setChain} setFaucet={setFaucet} tokenAPIUri={tokenAPIUri} setContractAddress={setPrismDAOMembershipContractAddress} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} mintPriceEth={mintPriceEth} /></div>
+        <div className="network-status">
+          <ETHBalance chain={chain} setChain={setChain} setFaucet={setFaucet} tokenAPIUri={tokenAPIUri} setContractAddress={setPrismDAOMembershipContractAddress} setTotalSupply={setTotalSupply} setMaxSupply={setMaxSupply} setMintPrice={setMintPrice} setPrismDAOMembershipEtherscan={setPrismDAOMembershipEtherscan} setNumTokensOwned={setNumTokensOwned} mintPriceEth={mintPriceEth} />
+        </div>
       </Background>
       {/* <style jsx>{`
         nav {
