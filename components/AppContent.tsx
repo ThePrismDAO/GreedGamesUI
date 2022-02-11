@@ -34,7 +34,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
                     <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
                         <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-20 font-normal leading-normal mt-20 text-center">
                             Minting goes live in 
-                            <div className="font-bold mt-5 lg:text-6xl text-green-400">
+                            <div className="font-bold mt-5 text-6xl text-green-400">
                                 <Countdown date={new Date(1644620400*1000)}><Complete></Complete></Countdown>
                             </div>
                         </div>
