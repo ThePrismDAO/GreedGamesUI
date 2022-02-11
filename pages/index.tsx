@@ -112,7 +112,7 @@ function Home() {
 
                 <ul className="absolute mr-0 sm:mr-5 text-left sm:text-right sm:relative top-8 sm:top-0 left-4 mt-8 sm:mt-8 flex-row space-y-0 sm:flex-col sm:space-y-2 font-medium text-lg ">
                   <li className="mr-0">
-                    <a className="text-white hover:opacity-70" href="https://testnets.opensea.io/collection/the-greed-games" target="_BLANK" rel="noopener noreferrer">Trade Gladiators</a>
+                    <a className="text-white hover:opacity-70" href="https://opensea.io/collection/prismdao-membership?search[sortAscending]=false&search[sortBy]=CREATED_DATE" target="_BLANK" rel="noopener noreferrer">Trade Gladiators</a>
                   </li>
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href="/PrismDAO White Paper.pdf" target="_BLANK" rel="noopener noreferrer">White Paper</a>
