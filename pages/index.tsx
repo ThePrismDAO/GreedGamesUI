@@ -84,6 +84,7 @@ function Home() {
     }
   }, [membershipData]);
  
+  // <a className="text-white hover:opacity-70" href="https://twitter.com/TheGreedGames" target="_BLANK" rel="noopener noreferrer"><FaTwitter  size="2.5em"  /> </a>
   return (
     
     <div>
@@ -101,7 +102,6 @@ function Home() {
                 <div className="socials  absolute sm:relative sm:top-0">
                   <a className="text-white hover:opacity-70 whitelist glow Gold-glow selected hidden sm:block" href="https://discord.gg/6vzvXKSnDb" target="_BLANK" rel="noopener noreferrer">WHITELIST ON DISCORD ☛ </a>
                   <a className="text-white hover:opacity-70 glow Gold-glow selected" href="https://discord.gg/6vzvXKSnDb" target="_BLANK" rel="noopener noreferrer"><FaDiscord size="2.5em" /> </a>
-                  <a className="text-white hover:opacity-70" href="https://twitter.com/TheGreedGames" target="_BLANK" rel="noopener noreferrer"><FaTwitter  size="2.5em"  /> </a>
                   <a className="text-white hover:opacity-70" href="https://medium.com/@greed.games" target="_BLANK" rel="noopener noreferrer"><FaMedium   size="2.5em" /> </a>
                 </div>
 
