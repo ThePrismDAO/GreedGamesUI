@@ -4,11 +4,12 @@
 
 pragma solidity ^0.8.0;
 
-import "https://github.com/chiru-labs/ERC721A/blob/main/contracts/ERC721A.sol";
+import "ERC721A.sol";
 
 contract PrismDAOMembership is ERC721A {
     // max minting batch size for ERC721A batch minting
-    uint256 internal maxMintBatchSize = 100;
+    // set to 556 for team/prize mint but will be immediately set to 100 after
+    uint256 internal maxMintBatchSize = 556;
 
     // to set the owner of the contract
     address private owner;
@@ -47,7 +48,7 @@ contract PrismDAOMembership is ERC721A {
      /**
      * @dev Set contract deployer as owner, params are name, symbol, and max mint batch size
      */
-    constructor() ERC721A("The Greed Games", "GLADIATOR", maxMintBatchSize) 
+    constructor() ERC721A("PrismDAO Membership", "GLADIATOR", maxMintBatchSize) 
     {
         // set the owner of this contract as the deployer
         owner = msg.sender; // 'msg.sender' is sender of current call, contract deployer for a constructor
@@ -60,7 +61,7 @@ contract PrismDAOMembership is ERC721A {
      */
 
     // the API address at uri/<token_id>
-    string private baseUri = "https://member.greed.games//";
+    string private baseUri = "https://member.greed.games/";
 
     // event for changing baseUri
     event BaseUriSet(string indexed oldBaseUri, string indexed newBaseUri);
@@ -88,8 +89,9 @@ contract PrismDAOMembership is ERC721A {
      * 
      */
 
-    // set price in wei -- defaults to 0.01 eth
-    uint256 private mintPriceWei = 10000000000000000 wei;
+    // set price in wei -- defaults to 0.0001 eth / 100000000000000 wei
+    // set price in wei -- will be immediately set to 0.01 / 10000000000000000 eth after team/prize mint
+    uint256 private mintPriceWei = 100000000000000 wei;
 
     /**
      * @dev Return mint price in wei 
@@ -119,7 +121,7 @@ contract PrismDAOMembership is ERC721A {
     // set hard cap for memberships?
 
     // set starting max memberships
-    uint256 private maxMemberships = 3000;
+    uint256 private maxMemberships = 3333;
 
     /**
      * @dev Return mint price in wei 
@@ -181,7 +183,7 @@ contract PrismDAOMembership is ERC721A {
     function mintMemberships(uint256 numberToMint) public payable returns (uint256) {
         // msg.value is in wei, as is our price above
         require(numberToMint > 0, "Must mint at least one token.");
-        require(numberToMint <= maxMintBatchSize || owner == msg.sender, "Must mint fewer tokens in a single batch. See getMaxMintBatchSize() for the current batch size.");
+        require(numberToMint <= maxMintBatchSize, "Must mint fewer tokens in a single batch. See getMaxMintBatchSize() for the current batch size.");
         require(msg.value >= (mintPriceWei*numberToMint), "Must send correct amount of ether to buy tokens. See getMintPriceWei() for the current price.");
         require(this.totalSupply() <= (maxMemberships-numberToMint), "You can't mint this many memberships! The maximum number of GUILD memberships have been minted or your batch size is too high. See getMaxMintBatchSize() for the current batch size.");
 

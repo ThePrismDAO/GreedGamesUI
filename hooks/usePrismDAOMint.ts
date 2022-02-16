@@ -7,7 +7,6 @@ export async function payWithMetamask(contract, library, numberToMint, strEther)
   const tx = await contract.mintMemberships(numberToMint, {value: ethers.utils.parseUnits(strEther, 'ether').toHexString()});
 }
 
-
 export default function usePrismDAOMembershipStatus(
 contractAddress, numberToMint, library, mintPriceEth
 ) {
@@ -20,3 +19,4 @@ contractAddress, numberToMint, library, mintPriceEth
 
   return callMint;
 }
+

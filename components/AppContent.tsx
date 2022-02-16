@@ -4,11 +4,17 @@ import GreedGameTeamSelect from "./GreedGameTeamSelect";
 import ViewBracket from "./ViewBracket";
 import { useRouter } from 'next/router'
 import Countdown from 'react-countdown';
+import PrismDAOAdmin from "./PrismDAOAdmin";
 
 const AppContent = ({account, library, chain, prismDAOMembershipContractAddress, numTokensOwned, gameStatus, setGameStatus, tokenAPIUri, numTokensMinted, numTokensAvailable, barWidth, numTokensToMint, setNumTokensToMint, mintPriceEth, setTotalSupply, setMaxSupply, setMintPrice, setPrismDAOMembershipEtherscan, setNumTokensOwned, tokens}) => {
     const router = useRouter()
     let isLive = true;
-
+    let isAdmin = false;
+    if(account == "0x779Bf279143F7BF1670e6EB848ae7732622849d5") isAdmin = true;
+    if(isAdmin) {
+        gameStatus = "Admin";
+        if(chain == "Rinkeby Testnet" || chain == "Kovan Testnet") isLive = false;
+    }
 
     let unconnected = false;
     if(!isLive) {
@@ -22,15 +28,23 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
         if(!unconnected && gameStatus !== "Minting") {
             setGameStatus("Minting");
         } else {
-            
+
             return(
                 <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
                     <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center"><Complete></Complete></div>
                 </div>
             )
-      
             
         }
+    }
+
+    // the default message when you havent connected metamask yet
+    if(gameStatus == "Admin") {
+        return(
+            <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
+                <PrismDAOAdmin prismDAOMembershipContractAddress={prismDAOMembershipContractAddress}></PrismDAOAdmin>
+            </div>
+        )
     }
 
     // show the minting page
@@ -45,7 +59,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
                 onChange={(e) => setNumTokensToMint(parseInt(e.currentTarget.value))}
                 >
                 {
-                    [0,1,2,3,4,5,6,7,8,9,14,19,29,39,49,99].map((value) => (<option className="text-sm text-black font-medium" key={value+1} value={value+1}>{value+1}</option>))
+                    [0,1,2,3,4,5,6].map((value) => (<option className="text-sm text-black font-medium" key={value+1} value={value+1}>{value+1}</option>))
                 }
                 </select>
                 {" "}
@@ -63,7 +77,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
 
         const cantMint = <div className="text-center py-4 lg:px-4 w-full">
             <div className="py-2 px-4 bg-black/20 items-center text-white leading-none inline-flex rounded-full " role="alert">
-            <span className="font-medium text-2xs md:text-sm leading-4 text-center mr-2 flex-auto">You have already minted 100 tokens, which is the maximum! Choose your gladiators to begin.</span>
+            <span className="font-medium text-2xs md:text-sm leading-4 text-center mr-2 flex-auto">You have already minted 7 or more tokens, which is the maximum! Choose your gladiators to begin.</span>
             </div>
         </div>
         
@@ -77,7 +91,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
                     <div className={"bg-gradient-to-r from-lime-500 to-emerald-500 rounded-full h-3 md:h-4 shadow-none shadow-lime-500/50 transition-width delay-0 duration-3000 ease-out "} style={{width: barWidth}}></div>
                 </div>
                 
-                {numTokensOwned < 100 ? minting : cantMint}
+                {numTokensOwned < 7 ? minting : cantMint}
             </div>
         )
     } 

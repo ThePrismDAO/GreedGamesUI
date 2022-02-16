@@ -24,13 +24,13 @@ const ETHBalance = ({chain, setChain, setFaucet, tokenAPIUri, setContractAddress
   if(chainId == 42) {
     faucet = "https://faucets.chain.link/kovan";
     chain = "Kovan Testnet";
-    prismDAOMembershipContractAddress = "0xb0178cae4d95e9a85aad5cb40d6c4bcc4a0e741c";
+    prismDAOMembershipContractAddress = "0x35662DA30BdD0Dd99962C9D91548675b63Ca77Fb";
       prismDAOMembershipEtherscan = "https://kovan.etherscan.io/token/"+prismDAOMembershipContractAddress;
   }
   if(chainId == 4) {
     faucet = "https://faucets.chain.link/rinkeby";
     chain = "Rinkeby Testnet";
-    prismDAOMembershipContractAddress = "0x35662DA30BdD0Dd99962C9D91548675b63Ca77Fb";
+    prismDAOMembershipContractAddress = "0x38d6a323ca5e083d7f53eab61d8ac41e58de2146";
     prismDAOMembershipEtherscan = "https://rinkeby.etherscan.io/token/"+prismDAOMembershipContractAddress;
   }
   if(chainId == 1) {
@@ -61,7 +61,7 @@ const ETHBalance = ({chain, setChain, setFaucet, tokenAPIUri, setContractAddress
     mintPriceEth = memberStatus['mintPrice'];
     numTokensOwned = memberStatus['tokensOwned'];
   }
-
+  console.log("CONTRACT PARAMS",memberStatus);
   // update the interface in index
   //setBaseURI(baseURI);
   setTotalSupply(totalSupply);

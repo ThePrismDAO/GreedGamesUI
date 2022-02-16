@@ -3,6 +3,7 @@ import type { PrismDAOMembership } from "../contracts/types";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 import usePrismDAOMembershipContract from "./usePrismDAOMembershipContract";
 import { parseBalance } from "../util";
+import { debug } from "console";
 
 function getStatus(contract: PrismDAOMembership, ownerAddress: string, tokenAPIUri: string) {
   return async (_: string) => {
@@ -12,7 +13,7 @@ function getStatus(contract: PrismDAOMembership, ownerAddress: string, tokenAPIU
       const maxMint = await contract.getMaxMintBatchSize();
       const tokensOwned = await contract.balanceOf(ownerAddress);
 
-      return {
+      const result = {
         "totalSupply":totalSupply.toNumber(), 
         "maxSupply":maxSupply.toNumber(),
         "tokensOwned":tokensOwned.toNumber(),
@@ -20,6 +21,8 @@ function getStatus(contract: PrismDAOMembership, ownerAddress: string, tokenAPIU
         "mintPrice":parseBalance(mintPrice),
         "maxMint":maxMint.toNumber()
       }; 
+      
+      return result;
   };
 }
 
