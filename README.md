@@ -1,20 +1,14 @@
 # PrismDAO Minting UI
 
-[See the deployed app here.](https://greed-games-ui.vercel.app/)
+[See the deployed app here.](https://greed.games)
 
 ## Features
 
 1. NFT minting using [Azuki's ERC721A](https://www.azuki.com/erc721a) implementation, which drastically reduces minting costs when minting in batches. It otherwise follows the NFT standard.
 2. **PrismDAOMemberships.sol** deployed to both Kovan and Rinkeby allows owner to set max supply, mint price, max mint batch size, changing API baseUri, changing to new owner, and revoking ownership.
 3. UI updates with live supply, max supply, and mint price in realtime.
-4. Loads minted NFTs via API and lets you create a team of 3 gladiators from the NFTs you own. This sort-of works when you uncomment the commented block of code in **usePrismDAOMembershipStatus.ts**. Sometimes i have to add and remove it to get it to work. Not sure why it bugs out some of the time and not others, probably need to catch some state to filter out the times it breaks.
-
-## To Do
-
-1. Error handling.
-2. Have max batch size load from contract value.
-3. Get rid of warnings about hook order.
-4. Limit mint owernship to a max value. I think this is best done on the frontend as it would increase cost to do it in the contract and you can just switch addresses to get around it anyway.
+4. Loads minted NFTs via API and lets you create a team of 3 gladiators from the NFTs you own. 
+5. Allows signing of message to The Gameskeeper to submit your team.
 
 ## Kovan Tesnet
 
@@ -58,11 +52,4 @@ export default function useMyContract() {
 }
 ```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Join our Discord server to learn more. You can find the link at https://greed.games/
