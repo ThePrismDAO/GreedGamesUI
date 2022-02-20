@@ -22,7 +22,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
     } else {
         if(chain !== "Ethereum Mainnet") unconnected = true;
     }
-    const Complete = () => <span><b>Connect your MetaMask</b> to Ethereum to begin</span>
+    const Complete = () => <span className=''><b>Connect your MetaMask</b> to Ethereum to begin</span>
     // the default message when you havent connected metamask yet
     if(gameStatus == "Unconnected") {
         if(!unconnected && gameStatus !== "Minting") {
@@ -30,8 +30,19 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
         } else {
 
             return(
-                <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading">
-                    <div className="header text-white text-2xl md:text-3xl lg:text-5xl md:mt-10 font-normal leading-normal mt-20 text-center"><Complete></Complete></div>
+                <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 main-heading mt-40 md:mt-0 text-center">
+                    <div className=" md:flex">
+                        <div className="inline-block w-100 text-center md:w-256"> 
+                            <div className='Gold-glow portrait object-center no-margin'>
+                                <div className="portrait-label glow"></div>
+                                <div className="portrait-rarity low-glow"></div>
+                                <img className='low-glow' src='https://member.greed.games/i/0-flicker.gif'></img>
+                            </div>
+                        </div>
+                        <div className="inline-block md:w-2/3 text-center flex items-center justify-center">
+                            <div className="header text-white text-2xl md:text-3xl xl:text-5xl font-normal leading-normal px-10 "><Complete></Complete></div>
+                        </div>
+                    </div>
                 </div>
             )
             
