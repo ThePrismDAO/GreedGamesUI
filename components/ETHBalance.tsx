@@ -61,7 +61,7 @@ const ETHBalance = ({chain, setChain, setFaucet, tokenAPIUri, setContractAddress
     mintPriceEth = memberStatus['mintPrice'];
     numTokensOwned = memberStatus['tokensOwned'];
   }
-  console.log("CONTRACT PARAMS",memberStatus);
+  //console.log("CONTRACT PARAMS",memberStatus);
   // update the interface in index
   //setBaseURI(baseURI);
   setTotalSupply(totalSupply);

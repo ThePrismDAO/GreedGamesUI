@@ -1,15 +1,18 @@
-export async function signWithMetamask(library, message) {
+export async function signWithMetamask(account, library, message) {
+  // sign the message and return the promise
   const signer = await library.getSigner();
   const tx = await signer.signMessage(message);
+  return tx;
 }
 
-
 export default function useSignTeam(
-library, message
+account, library, message, setRegisterTeamTx
 ) {
   const callMint = () => {
-    let receipt = signWithMetamask(library, message);
-    console.log("sent with tx hash:",receipt);
+    let tx = signWithMetamask(account, library, message);
+    tx.then((data) => {
+      setRegisterTeamTx(data)
+    });
   }
 
   return callMint;

@@ -3,30 +3,77 @@ import { useEffect, useState } from "react";
 import useSignTeam from "../hooks/useSignTeam";
 import TeamStats from "./TeamStats";
 import usePrismDAOAttributes from "../hooks/usePrismDAOAttributes"
+import Countdown from 'react-countdown';
+import useSWR from "swr"
+
+const fetcher = url => fetch(url).then(res => res.json())
+const baseUrl = "https://member.greed.games/gameskeeper/"
 
 const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokensOwned, tokenAPIUri}) => {
     // get the attributes data
     let tokenAttributes = usePrismDAOAttributes();
-    
 
     // for state of register button
     const [registerActive, setRegisterActive] = useState("");
     const [teamString, setTeamString] = useState("");
+    const [registerTeamTx, setRegisterTeamTx] = useState("");
+    const [registeredTeam, setTeam] = useState("");
 
     // create vars for all of the team slots and give default blank data
     const defaultSlotData = {"image":"https://member.greed.games/i/blank.png","id":"","guild":"Select","rarity":""};
     const [teamSlot1, setTeamSlot1] = useState(defaultSlotData);
-    const [teamSlot1Status, setTeamSlot1status] = useState("unselected");
+    const [teamSlot1Status, setTeamSlot1status] = useState("unloaded");
     const [teamSlot2, setTeamSlot2] = useState(defaultSlotData);
-    const [teamSlot2Status, setTeamSlot2status] = useState("unselected");
+    const [teamSlot2Status, setTeamSlot2status] = useState("unloaded");
     const [teamSlot3, setTeamSlot3] = useState(defaultSlotData);
-    const [teamSlot3Status, setTeamSlot3status] = useState("unselected");
+    const [teamSlot3Status, setTeamSlot3status] = useState("unloaded");
+
+    // get the registered team from the gameskeeper api
+    let teamUri = baseUrl +"?team_address="+account;
+    const { data: team, error } = useSWR(teamUri, fetcher)
+    let buttonText = "Register";
+    if (team) {
+        if(team != registeredTeam) {
+            console.log(team);
+            setTeam(team);
+            if(team['registered'] == false) {
+                setTeamSlot1status("unselected");
+                setTeamSlot2status("unselected");
+                setTeamSlot3status("unselected");
+            }
+            if(team['registered'] == true) {
+                
+                if(teamSlot1Status != "unloaded") setTeamSlot1status("selected");
+                if(teamSlot2Status != "unloaded") setTeamSlot2status("selected");
+                if(teamSlot3Status != "unloaded") setTeamSlot3status("selected");
+            }
+        }
+        if(team['registered'] == true) buttonText = "Re-register";
+    } 
+
+    // sends the get request to register a team
+    async function registerTeam(tx, setTeam) {
+        if(registerTeamTx!="") {
+            console.log("REGISTERED TEAM",tx)
+            let registerTeamUri = baseUrl +"?register_address="+account+"&team="+teamString+"&tx="+tx;
+            await fetch(registerTeamUri).then((data) => {
+                const r = data.json();
+                console.log("REGISTERED TEAM:",r);
+                setTeam(r);
+            });
+        }
+    }
+
+    // effect for when we sign a message
+    useEffect(() => {  
+        registerTeam(registerTeamTx, setTeam); 
+    }, [registerTeamTx])
 
     function makeTeamString(teamSlot1, teamSlot2, teamSlot3) {
         let newString = "";
-        if(teamSlot1.id != "") newString = newString + teamSlot1.guild+teamSlot1.id;
-        if(teamSlot2.id != "") newString = newString + teamSlot2.guild+teamSlot2.id;
-        if(teamSlot3.id != "") newString = newString + teamSlot3.guild+teamSlot3.id;
+        if(teamSlot1.id != "") newString = newString + teamSlot1.guild+teamSlot1.id.replace("#",'.');
+        if(teamSlot2.id != "") newString = newString + '-' + teamSlot2.guild+teamSlot2.id.replace("#",'.');
+        if(teamSlot3.id != "") newString = newString + '-' + teamSlot3.guild+teamSlot3.id.replace("#",'.');
         setTeamString(newString);
     }
 
@@ -34,6 +81,14 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
         makeTeamString(teamSlot1, teamSlot2, teamSlot3)
     }, [teamSlot1, teamSlot2, teamSlot3])
 
+    useEffect(() => {
+        if(teamSlot1Status == 'selected' && teamSlot2Status == 'selected' && teamSlot3Status == 'selected') {
+            // make register button active
+            setRegisterActive("active");
+        }
+    }, [teamSlot1Status, teamSlot2Status, teamSlot3Status])
+
+    
 
     const onPortraitClick = (t) => {
         let filled = false;
@@ -65,10 +120,6 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
             if(!(slotData.id == teamSlot1.id && slotData.guild == teamSlot1.guild) && !(slotData.id == teamSlot2.id && slotData.guild == teamSlot2.guild) ) {
                 setTeamSlot3(slotData);
                 setTeamSlot3status("selected");
-
-                // make register button active
-                // make this live later
-                //setRegisterActive("active");
             }
         }
     }
@@ -103,11 +154,10 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
                 let attributeGuild2 = "";
                 let attributeGuild3 = "";
                 // change when live
-                //let attributeRarity = "Rare";
-                let attributeRarity = "Unrevealed";
+                let attributeRarity = "Rare";
+                //let attributeRarity = "Unrevealed";
                
                 if(tokenAttributes.length > 0) {
-                    
                     const attributesLen = tokenAttributes[t.tokenIndex]?.attributes.length;
                     
                     if (attributesLen == 3) attributeClass = tokenAttributes[t.tokenIndex].attributes[1]['value'];
@@ -130,12 +180,49 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
                 // set it for the slotdata
                 t.rarity = attributeRarity;
                 t.class = attributeClass;
+                t.guildIndex = Math.floor(t.tokenIndex/7);
+
+                // the unique id that the API uses
+                t.teamId = t.guild+"."+t.guildIndex;
+
+                // default slotData in case we need to set the active ones from saved
+                const slotData = {
+                    "image":tokenAPIUri+t.tokenIndex+"/image",
+                    "id": "#"+Math.floor(t.tokenIndex/7),
+                    "guild": t.guild,
+                    "rarity": t.rarity,
+                    "class": t.class,
+                    "secondGuild": t.secondGuild,
+                    "thirdGuild": t.thirdGuild
+                }
+
+                // set the slots from the saved api data if they are empty
+                if(t.teamId == registeredTeam['player1']) {
+                    if(teamSlot1Status == "unloaded") {
+                        setTeamSlot1(slotData);
+                        setTeamSlot1status("selected");
+                    }
+                }
+
+                if(t.teamId == registeredTeam['player2']) {
+                    if(teamSlot2Status == "unloaded") {
+                        setTeamSlot2(slotData);
+                        setTeamSlot2status("selected");
+                    }
+                }
+
+                if(t.teamId == registeredTeam['player3']) {
+                    if(teamSlot3Status == "unloaded") {
+                        setTeamSlot3(slotData);
+                        setTeamSlot3status("selected");
+                    }
+                }
 
                 return(
             <div className={t.guild+"-glow portrait"} key={t.tokenIndex}>
                 <div className="portrait-label glow">
                 <span className={t.guild}><span className={attributeGuild3}>{attributeGuild3}</span> <span className={attributeGuild2}>{attributeGuild2}</span> {t.guild} {attributeClass}</span></div>
-                <div className="portrait-id"><span className={t.guild}> #{Math.floor(t.tokenIndex/7)}</span></div>
+                <div className="portrait-id"><span className={t.guild}> #{t.guildIndex}</span></div>
                 <div className="portrait-rarity low-glow"><span className={attributeRarity}> {attributeRarity}</span></div>
                 <img className="low-glow" src={tokenAPIUri+t.tokenIndex+"/image"}  onClick={() => onPortraitClick(t)} />
             </div>)
@@ -145,18 +232,26 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
 
     // get the mint tx call to pass as an onclick event
     // when we go live turn this back on
-    //const callSign = useSignTeam(library, "team: "+teamString);
-    const callSign = () => { return };
+    const callSign = useSignTeam(account, library, teamString, setRegisterTeamTx);
+    //const callSign = () => { return };
+
+
+    // countdown to the next games
+    const Complete = () => <span className=''>The Greed Games have begun!</span>
+    
 
     return (
         <div>
             <div className="team">
                 <div className="portraits-title">YOUR TEAM 
                     <div className="float-right py-30 relative">
+                        <div className='register-countdown'><b><Countdown date={new Date(1646640000 * 1000)} /></b> until the <span className='text-black-400 font-bold'>First Greed Games</span>!</div>
+                    
                         <button 
                 className={registerActive+" px-3 py-1 text-lg lg:text-x1 lg:px-6 lg:py-2 xl:text-lg xl:px-5 xl:py-2 font-medium text-white rounded-sm outline outline-2 z-10 register-team-button inactive"}
                 onClick={() => callSign()}
-            >Register team with the Gameskeeper →</button>
+            >{buttonText} team with the Gameskeeper →</button>
+                        
                     </div> 
                 </div>
                 

@@ -341,6 +341,14 @@ a {
   left:20px;
   bottom:16px;
 }
+.register-countdown {
+  position:absolute;
+  left:20px;
+  font-size:15px;
+  color:white;
+  bottom:82px;
+  font-weight: 400;
+}
 
 .register-team-button.active {
   color:gold;
