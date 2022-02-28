@@ -173,19 +173,19 @@ a {
 }
 
 .Blue {
-  color:rgb(0, 123, 255);
+  color:#007bff;
 }
 .Green {
-  color:rgb(0, 255, 0);
+  color:#00ff00;
 }
 .Gold {
-  color:rgba(253, 152, 0, 0.994);
+  color:#fd9800fd;
 }
 .Red {
-  color:rgb(255, 30, 0);
+  color:#ff1e00;
 }
 .Purple {
-  color:rgb(197, 5, 197);
+  color:#c505c5;
 }
 .Black {
   color: black;
@@ -419,13 +419,7 @@ a {
 
 
 /* remove this when going live */
-.portrait-id {
-  display:none;
-}
-.portrait:hover .portrait-rarity {
-bottom:76px;
-font-size:12px;
-}
+
 
 .no-margin {
   margin-left:0;

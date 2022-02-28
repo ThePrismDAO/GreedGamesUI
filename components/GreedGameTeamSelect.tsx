@@ -222,7 +222,7 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
             <div className={t.guild+"-glow portrait"} key={t.tokenIndex}>
                 <div className="portrait-label glow">
                 <span className={t.guild}><span className={attributeGuild3}>{attributeGuild3}</span> <span className={attributeGuild2}>{attributeGuild2}</span> {t.guild} {attributeClass}</span></div>
-                <div className="portrait-id"><span className={t.guild}> #{t.guildIndex}</span></div>
+                <div className="portrait-id"> <span className={t.guild}> #{t.guildIndex}</span></div>
                 <div className="portrait-rarity low-glow"><span className={attributeRarity}> {attributeRarity}</span></div>
                 <img className="low-glow" src={tokenAPIUri+t.tokenIndex+"/image"}  onClick={() => onPortraitClick(t)} />
             </div>)
