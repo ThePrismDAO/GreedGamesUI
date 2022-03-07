@@ -84,7 +84,7 @@ function Home() {
     }
   }, [membershipData]);
  
-  // <a className="text-white hover:opacity-70" href="https://twitter.com/TheGreedGames" target="_BLANK" rel="noopener noreferrer"><FaTwitter  size="2.5em"  /> </a>
+  // 
   return (
     
     <div>
@@ -103,6 +103,7 @@ function Home() {
                   <a className="text-white hover:opacity-70 whitelist glow Gold-glow selected hidden sm:block" href="https://discord.gg/tWHKYyxdrj" target="_BLANK" rel="noopener noreferrer">WHITELIST ON DISCORD ☛ </a>
                   <a className="text-white hover:opacity-70 glow Gold-glow selected" href="https://discord.gg/tWHKYyxdrj" target="_BLANK" rel="noopener noreferrer"><FaDiscord size="2.5em" /> </a>
                   <a className="text-white hover:opacity-70" href="https://medium.com/@greed.games" target="_BLANK" rel="noopener noreferrer"><FaMedium   size="2.5em" /> </a>
+                  <a className="text-white hover:opacity-70" href="https://twitter.com/GreedGamesNFTs" target="_BLANK" rel="noopener noreferrer"><FaTwitter  size="2.5em"  /> </a>
                 </div>
 
                 <h1 className="text-6xl md:text-8xl font-bold text-white text-right select-none z-1 clear">
@@ -117,11 +118,15 @@ function Home() {
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href="/PrismDAO White Paper.pdf" target="_BLANK" rel="noopener noreferrer">White Paper</a>
                   </li>
+                  
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href="https://github.com/ThePrismDAO/GreedGamesUI" target="_BLANK" rel="noopener noreferrer">Repository</a>
                   </li>
                   <li className="mr-0">
                     <a className="text-white hover:opacity-70" href={prismDAOMembershipEtherscan} target="_BLANK" rel="noopener noreferrer">Contract</a>
+                  </li>
+                  <li className="mr-0">
+                    <a className="text-white hover:opacity-70" href="#" onClick={() => setGameStatus("ViewBracket")}>Bracket</a>
                   </li>
                  
                 </ul>

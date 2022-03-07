@@ -233,13 +233,10 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
     // get the mint tx call to pass as an onclick event
     // when we go live turn this back on
     const callSign = useSignTeam(account, library, teamString, setRegisterTeamTx);
-    //const callSign = () => { return };
-
 
     // countdown to the next games
     const Complete = () => <span className=''>The Greed Games have begun!</span>
     
-
     return (
         <div>
             <div className="team">
