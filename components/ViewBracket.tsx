@@ -96,7 +96,7 @@ const RoundTitle = (title: React.ReactNode, roundIndex: number) => {
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const GreedGamesBracket = () => {
-  const { data: rounds, error } = useSWR("https://member.greed.games/teams/", fetcher);
+  const { data: rounds, error } = useSWR("https://member.greed.games/gameskeeper/?bracket=1", fetcher);
   if (error) return <div>failed to load</div>
  
   if (!rounds) return (
