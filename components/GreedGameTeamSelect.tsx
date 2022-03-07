@@ -242,7 +242,7 @@ const GreedGameTeamSelect = ({setGameStatus, library, account, tokens, numTokens
             <div className="team">
                 <div className="portraits-title">YOUR TEAM 
                     <div className="float-right py-30 relative">
-                        <div className='register-countdown'><b><Countdown date={new Date(1646812800 * 1000)} /></b> until the <span className='text-black-400 font-bold'>First Greed Games</span>!</div>
+                        <div className='register-countdown'><b><Countdown date={new Date(1648796400 * 1000)} /></b> until the <span className='text-black-400 font-bold'>First Greed Games</span>!</div>
                     
                         <button 
                 className={registerActive+" px-3 py-1 text-lg lg:text-x1 lg:px-6 lg:py-2 xl:text-lg xl:px-5 xl:py-2 font-medium text-white rounded-sm outline outline-2 z-10 register-team-button inactive"}
