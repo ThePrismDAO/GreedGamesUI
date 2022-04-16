@@ -23,6 +23,7 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
         if(chain !== "Ethereum Mainnet") unconnected = true;
     }
     const Complete = () => <span className=''><b>Connect your MetaMask</b> to Ethereum to begin</span>
+
     // the default message when you havent connected metamask yet
     if(gameStatus == "Unconnected") {
         if(!unconnected && gameStatus !== "Minting") {
@@ -86,23 +87,31 @@ const AppContent = ({account, library, chain, prismDAOMembershipContractAddress,
             </div>
         </div>
 
+        let message = 'You have already minted 7 or more tokens, which is the maximum! Choose your gladiators to begin.'
+        let noGladiatorsMessage = <div>Select the number to mint (3 gladiators form a Greed Games Team) and press <span className="text-green-400 font-bold drop-shadow-md shadow-black">Mint Gladiators</span> to mint your team.</div>
+        if(numTokensAvailable / numTokensMinted >= 1) {
+            noGladiatorsMessage = <div>Minting is complete! <span className=""><a className="hover:opacity-70 text-green-400 font-bold drop-shadow-md shadow-black" href="https://opensea.io/collection/prismdao-membership?search[sortAscending]=false&search[sortBy]=CREATED_DATE" target="_BLANK" rel="noopener noreferrer">Purchase Gladiators on OpenSea</a></span> to assemble your team.</div>
+            message = 'Do you have a need for Greed?'
+        }
+
         const cantMint = <div className="text-center py-4 lg:px-4 w-full">
             <div className="py-2 px-4 bg-black/20 items-center text-white leading-none inline-flex rounded-full " role="alert">
-            <span className="font-medium text-2xs md:text-sm leading-4 text-center mr-2 flex-auto">You have already minted 7 or more tokens, which is the maximum! Choose your gladiators to begin.</span>
+            <span className="font-medium text-2xs md:text-sm leading-4 text-center mr-2 flex-auto">{message}</span>
             </div>
         </div>
-        
+
         return(
 
             <div className="absolute w-10/12 md:w-8/12 lg:w-6/12 2xl:w-6/12 mt-16 md:mt-0">
-                <GreedGameTeamButton numTokensOwned={numTokensOwned} setGameStatus={setGameStatus}/>
+                
+                <GreedGameTeamButton numTokensOwned={numTokensOwned} setGameStatus={setGameStatus} noGladiatorsMessage={noGladiatorsMessage}/>
                         
                 <div className="text-right text-white font-normal mb-2 md:mb-0 text-xs md:text-base">minted <span className="text-green-400 font-bold drop-shadow-md shadow-black">{numTokensMinted}</span> / {numTokensAvailable}</div>
                 <div className="w-full bg-black rounded-full h-3 md:h-4 mb-3 md:mb-6 bg-opacity-100 border-0 border-white shadow-2xl">
                     <div className={"bg-gradient-to-r from-lime-500 to-emerald-500 rounded-full h-3 md:h-4 shadow-none shadow-lime-500/50 transition-width delay-0 duration-3000 ease-out "} style={{width: barWidth}}></div>
                 </div>
                 
-                {numTokensOwned < 7 ? minting : cantMint}
+                {numTokensOwned < 7 && numTokensAvailable / numTokensMinted < 1 ? minting : cantMint}
             </div>
         )
     } 

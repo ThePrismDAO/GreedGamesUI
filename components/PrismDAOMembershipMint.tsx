@@ -10,6 +10,7 @@ const PrismDAOMembershipMint = ({prismDAOMembershipContractAddress, numTokensToM
 
   // get the mint tx call to pass as an onclick event
   const callMint = usePrismDAOMint(prismDAOMembershipContractAddress, numTokensToMint, library, mintPriceEth);
+
   
   return (
     <button 
@@ -17,6 +18,8 @@ const PrismDAOMembershipMint = ({prismDAOMembershipContractAddress, numTokensToM
     onClick={callMint}
   >+ Mint Gladiators</button>
   )
+  
+  
 };
 
 export default PrismDAOMembershipMint;
